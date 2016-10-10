@@ -1,0 +1,17 @@
+<h2>This is the list of all houses</h2>
+
+<ul>
+
+  <% @houses.each do |house| %>
+    <% if house.availability %>
+      <span><em><%= link_to(house.name, house_path(house)) %></em></span>
+      <br>
+      <%= image_tag(house.image1)%>
+      <li><%= house.address %></li>
+      <li>Price per night: <%= number_to_currency(house.price) %></li>
+      <li><em><%= house.blurb %></em></li>
+      <br>
+    <% end %>
+  <% end %>
+
+</ul>

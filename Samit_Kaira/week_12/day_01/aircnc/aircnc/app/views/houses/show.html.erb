@@ -1,0 +1,67 @@
+<h2>This is the page for: <%= @house.name %> </h2>
+
+<!-- IMAGE CAROUSEL -->
+<div class="autoplay">
+  <div>
+    <%= image_tag(@house.image1, :class => "autoplay")%>
+  </div>
+  <div>
+    <%= image_tag(@house.image2, :class => "autoplay")%>
+  </div>
+  <div>
+    <%= image_tag(@house.image3, :class => "autoplay")%>
+  </div>
+  <div>
+    <%= image_tag(@house.image4, :class => "autoplay")%>
+  </div>
+  <div>
+    <%= image_tag(@house.image5, :class => "autoplay")%>
+  </div>
+</div>
+
+<hr>
+<h3>Details</h3>
+<ul>
+  <li><em><%= @house.blurb %></em></li>
+  <li><%= @house.address %></li>
+  <li>Availability for: <%= @house.about %></li>
+  <li>Price per night: <%= number_to_currency(@house.price) %></li>
+  <li>Amenities available: <%= @house.amenities %></li>
+  <li>Suitable for: <%= @house.house_rules %></li>
+  <br>
+</ul>
+
+
+<hr>
+<h3>Reviews</h3>
+
+<h4>Leave a comment:</h4>
+
+<div class="new-comment-submission">
+    <%= form_for(@comment, :remote => true, :format => :json) do |f| %>
+      <%= f.text_field :content, :class => "create-a-comment"%>
+      <%= f.hidden_field :house_id, value:@house.id %>
+      <%= f.submit %>
+    <% end %>
+</div>
+
+
+<ul>
+  <div class="new-comment-display"></div>
+  <% @house.comments.each do |comment| %>
+    <li>
+        <%= comment.content %>
+    </li>
+  <% end %>
+</ul>
+<br>
+
+
+<hr>
+<h3>Current bookings</h3>
+<button id="show-all-bookings">Show all bookings</button>
+<button id="stop-all-bookings">Stop all bookings</button>
+
+<div class="booking-display">
+
+</div>

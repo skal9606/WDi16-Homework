@@ -1,0 +1,26 @@
+<h1>This is the page of: <%- @user.name %> </h1>
+
+<ul>
+  <li>Username: <%= @user.name %></li>
+  <li>Email: <%= @user.email %></li>
+  <br>
+  <h4>Previous bookings</h4>
+  <hr>
+
+  <% @user.bookings.each do |booking| %>
+    <li>Start date: <%= booking.start_date %> </li>
+    <li>End date: <%= booking.end_date %> </li>
+    <li>Venue: <%= booking.house.address %> </li>
+    <li>Price per night: <%= number_to_currency(booking.house.price) %> </li>
+    <li>Owner: <%= booking.house.owner %> </li>
+    <br>
+  <% end %>
+</ul>
+
+
+<% if @current_user && @current_user.id == @user.id %> <!-- i.e. you can't edit the page of someone else (because you should only be able to edit your own page) -->
+  <div class="controls">
+    <%= link_to("Edit", edit_user_path(@user.id)) %> <!-- Here the ID is saved on @user -->
+    <%= link_to("Delete account", user_path(@user.id), :method => :delete) %>
+  </div>
+<% end %>
