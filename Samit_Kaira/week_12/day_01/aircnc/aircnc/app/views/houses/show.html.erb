@@ -19,11 +19,18 @@
   </div>
 </div>
 
+
+
+
+
+
 <hr>
 <h3>Details</h3>
 <ul>
   <li><em><%= @house.blurb %></em></li>
   <li><%= @house.address %></li>
+  <li><div id="latitude"><%= @house.latitude %></div></li>
+  <li><div id="longitude"><%= @house.longitude %></div></li>
   <li>Availability for: <%= @house.about %></li>
   <li>Price per night: <%= number_to_currency(@house.price) %></li>
   <li>Amenities available: <%= @house.amenities %></li>
@@ -31,6 +38,48 @@
   <br>
 </ul>
 
+<hr>
+<h3>Map</h3>
+<div id="map"></div>
+<script>
+  var baseURLTwo = window.location.pathname;
+  console.log(baseURLTwo);
+
+  //STEP 3
+  var displayLocation = function(data){
+      // console.log(data.latitude);
+      // console.log(data.longitude);
+
+      var map;
+      map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: data.latitude, lng: data.longitude},
+      zoom: 12});
+      var marker = new google.maps.Marker({
+        position: {lat: data.latitude, lng: data.longitude},
+        map: map
+      });
+  };
+
+
+  //STEP 2
+  var getLocation = function(){
+      $.ajax({
+          url: baseURLTwo,
+          type: "GET",
+          dataType: "JSON"
+      }).done(displayLocation);
+  };
+
+  //STEP 1
+  $(document).on("turbolinks:load",function(){
+      getLocation();
+  });
+</script>
+
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwXoZTHL0vTglh3ntXpJHOKiMWoAeEl8I&callback=displayLocation">
+</script>
 
 <hr>
 <h3>Reviews</h3>

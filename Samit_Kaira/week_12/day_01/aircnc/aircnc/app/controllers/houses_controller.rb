@@ -19,7 +19,8 @@ def new
 end
 
 def create
-  house = House.create(house_params)
+  @house = House.create(house_params)
+  @house.save
   redirect_to "/houses"
 end
 
@@ -42,7 +43,7 @@ end
 
 private
   def house_params
-    params.require(:house).permit(:name, :address, :blurb, :about, :availability, :owner, :price, :amenities, :house_rules, :image1, :image2, :image3, :image4, :image5)
+    params.require(:house).permit(:name, :address, :blurb, :about, :availability, :owner, :price, :amenities, :house_rules, :image1, :image2, :image3, :image4, :image5, :latitude, :longitude)
   end
 
   def authorise

@@ -19,9 +19,15 @@
 #  image5       :text
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  latitude     :float
+#  longitude    :float
 #
 
 class House < ActiveRecord::Base
   has_many :bookings
   has_many :comments
+
+  #geocoder
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
 end
