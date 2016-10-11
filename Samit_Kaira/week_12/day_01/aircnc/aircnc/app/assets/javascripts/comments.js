@@ -7,7 +7,6 @@ var retrieveComment = function(){
 
 };
 
-
 //STEP 1
   //Event handler
 $(document).on("turbolinks:load",function(){

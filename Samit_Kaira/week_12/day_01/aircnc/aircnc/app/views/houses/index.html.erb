@@ -1,18 +1,20 @@
 <h2>This is the list of all houses</h2>
+<button id="compare-prices">Compare prices!</button>
+
+<canvas id="myChart"></canvas>
+
 
 <ul>
-
   <% @houses.each do |house| %>
 
       <span><em><%= link_to(house.name, house_path(house)) %></em></span>
       <br>
       <%= image_tag(house.image1)%>
       <li><%= house.address %></li>
-      <li><%= house.latitude %></li>
-      <li><%= house.longitude %></li>
+      <div><% house.latitude %></div>
+      <div><% house.longitude %></div>
       <li>Price per night: <%= number_to_currency(house.price) %></li>
       <li><em><%= house.blurb %></em></li>
       <br>
   <% end %>
-
 </ul>

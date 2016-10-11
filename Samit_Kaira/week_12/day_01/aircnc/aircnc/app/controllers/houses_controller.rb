@@ -3,43 +3,47 @@ before_action :authorise, :only => [:edit]
 
   def index
     @houses = House.all
+    respond_to do |f|
+      f.html {}
+      f.json { render json: @houses.to_json(include: :bookings)}
+    end
   end
 
-def show
-  @house = House.find(params[:id])
-  @comment = Comment.new
-  respond_to do |f|
-  f.html {}
-    f.json { render json: @house.to_json(include: :bookings)}
+  def show
+    @house = House.find(params[:id])
+    @comment = Comment.new
+    respond_to do |f|
+      f.html {}
+      f.json { render json: @house.to_json(include: :bookings)}
+    end
   end
-end
 
-def new
-  @house = House.new
-end
+  def new
+    @house = House.new
+  end
 
-def create
-  @house = House.create(house_params)
-  @house.save
-  redirect_to "/houses"
-end
+  def create
+    @house = House.create(house_params)
+    @house.save
+    redirect_to "/houses"
+  end
 
-def edit
-  @house = House.find(params[:id])
-end
+  def edit
+    @house = House.find(params[:id])
+  end
 
-def update
-  house = House.find(params[:id])
-  house.update(house_params)
-  redirect_to "/houses/#{house.id}"
-end
+  def update
+    house = House.find(params[:id])
+    house.update(house_params)
+    redirect_to "/houses/#{house.id}"
+  end
 
 
-def destroy
-  house = House.find(params[:id])
-  house.destroy
-  redirect_to "/houses"
-end
+  def destroy
+    house = House.find(params[:id])
+    house.destroy
+    redirect_to "/houses"
+  end
 
 private
   def house_params
