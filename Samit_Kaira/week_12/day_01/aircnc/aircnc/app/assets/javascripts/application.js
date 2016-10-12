@@ -15,6 +15,10 @@
 //= require turbolinks
 //= require_tree .
 
+
+
+
+// IMAGE SLIDER
 $(document).on("turbolinks:load", function() {
   $('.autoplay').slick({
     slidesToShow: 3,

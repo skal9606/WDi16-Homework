@@ -1,3 +1,4 @@
+//DISPLAYING ALL BOOKINGS FOR A PARTICULAR HOUSE ON A CALENDAR
 var start_date;
 var start_date_components;
 var start_day;
@@ -6,9 +7,6 @@ var end_date_components;
 var end_day;
 var calendar_day;
 var cell_id;
-
-
-
 
 //STEP 4
   //Create the calendar for the month

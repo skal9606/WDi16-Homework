@@ -1,3 +1,5 @@
+//AJAX FOR COMMENTS/REVIEWS ON EACH HOUSE'S PAGE
+
 //STEP 2
 var retrieveComment = function(){
   var commentInTransit = $("#comment_content").val();

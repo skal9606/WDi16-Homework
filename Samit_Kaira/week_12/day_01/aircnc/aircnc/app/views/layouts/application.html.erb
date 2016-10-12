@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script> -->
 
 </head>
 <body>
@@ -14,13 +14,13 @@
     <ul>
       <li><%= link_to "All houses", houses_path %></li>
       <% if @current_user %>
+        <li>Current user: <%= @current_user.name %></li>
         <li><%= link_to "View account", user_path(@current_user) %></li>
         <li><%= link_to "Logout", logout_path, method: :delete %></li>
       <% else %>
         <li><%= link_to "Sign up", new_user_path %></li>
         <li><%= link_to "Login", login_path %></li>
       <% end %>
-
     </ul>
   </nav>
 

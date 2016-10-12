@@ -1,3 +1,5 @@
+//CHART.JS
+
 var price;
 var allPrices = [];
 var allLabels = [];

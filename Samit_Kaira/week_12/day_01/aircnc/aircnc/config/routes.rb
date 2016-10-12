@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   post '/login' => 'session#create'
   delete '/logout' => 'session#destroy'
 
-  resources :houses, :comments, :bookings, :users
+  resources :houses, :comments, :bookings, :users, :charges
 end

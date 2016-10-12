@@ -1,0 +1,23 @@
+<h3>A list of all bookings!</h3>
+
+<ul>
+  <% @bookings.each do |booking| %>
+    <li>Name: <%= booking.name %></li>
+    <li>Start date: <%= booking.start_date %></li>
+
+    <li>End date: <%= booking.end_date %></li>
+    <li>Total days: <%= booking.end_date.mday - booking.start_date.mday %></li>
+    <li>Guests: <%= booking.guests %></li>
+
+    <% if booking.house %>
+      <li>House: <%= booking.house.name %></li>
+      <li>Price per night: <%= number_to_currency(booking.house.price) %></li>
+      <li>Total price: <%= number_to_currency((booking.end_date.mday.to_i - booking.start_date.mday.to_i)*booking.house.price) %></li>
+    <% end %>
+
+
+
+    <br>
+    <hr>
+  <% end %>
+</ul>

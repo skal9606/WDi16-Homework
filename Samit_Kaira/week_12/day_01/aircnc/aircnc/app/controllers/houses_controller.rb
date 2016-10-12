@@ -1,5 +1,5 @@
 class HousesController < ApplicationController
-before_action :authorise, :only => [:edit]
+before_action :authorise, :only => [:edit, :show]
 
   def index
     @houses = House.all
@@ -11,7 +11,9 @@ before_action :authorise, :only => [:edit]
 
   def show
     @house = House.find(params[:id])
+    @user = @current_user
     @comment = Comment.new
+    @booking = Booking.new
     respond_to do |f|
       f.html {}
       f.json { render json: @house.to_json(include: :bookings)}

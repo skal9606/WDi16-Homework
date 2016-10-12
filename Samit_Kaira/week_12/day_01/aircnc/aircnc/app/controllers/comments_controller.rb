@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
   def index
+    @comments = Comment.all
+    respond_to do |f|
+      f.html {}
+      f.json { render json: @comments.to_json}
+    end
   end
-  
+
   def create
     @comment = Comment.create(comment_params)
 

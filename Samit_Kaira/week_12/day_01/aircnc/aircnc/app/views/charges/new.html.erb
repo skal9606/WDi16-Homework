@@ -1,0 +1,39 @@
+<h2>Booking summary</h2>
+
+<ul>
+<li>Booking name: <%= @booking_summary.name %></li>
+<li>User's email: <%= @booking_summary.user.email %></li>
+<li>Start date: <%= @booking_summary.start_date %></li>
+<li>End date: <%= @booking_summary.end_date %></li>
+<li>Total days: <%= @booking_summary.end_date.mday - @booking_summary.start_date.mday %></li>
+
+<li>Price per night: <%= number_to_currency(@booking_summary.house.price) %></li>
+<li>Total price: <%= number_to_currency((@booking_summary.end_date.mday.to_i - @booking_summary.start_date.mday.to_i)*@booking_summary.house.price) %></li>
+</ul>
+
+
+
+<hr>
+<br>
+
+<!-- STRIPE -->
+<h2>Pay here</h2>
+
+<%= form_tag charges_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Amount: $5.00</span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="A month's subscription"
+          data-amount="500"
+          data-locale="auto"></script>
+<% end %>
