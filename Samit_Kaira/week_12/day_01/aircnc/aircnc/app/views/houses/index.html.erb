@@ -12,6 +12,10 @@
   <%= submit_tag "Search" %>
 <% end %>
 
+<% unless @houses.present? %>
+  <p>There are no houses in the city of "<%= params[:search] %>" </p>
+<% end %>
+
 
 <!-- HOUSE DISPLAY -->
 <hr>
