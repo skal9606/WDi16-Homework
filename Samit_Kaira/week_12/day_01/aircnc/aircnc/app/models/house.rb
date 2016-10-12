@@ -30,4 +30,9 @@ class House < ActiveRecord::Base
   #geocoder
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
+
+  #search functionality
+  def self.search(search)
+    where("city LIKE ?", "%#{search}%")
+  end
 end

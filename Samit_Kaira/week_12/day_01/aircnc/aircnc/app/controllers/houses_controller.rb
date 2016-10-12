@@ -3,6 +3,15 @@ before_action :authorise, :only => [:edit, :show]
 
   def index
     @houses = House.all
+
+    #SEARCH
+    if params[:search]
+      @houses = House.search(params[:search]).order("created_at DESC")
+    else
+      @houses = House.all.order('created_at DESC')
+    end
+
+    #RENDERING ALL BOOKINGS FOR THE PURPOSES OF DEVELOPMENT ONLY
     respond_to do |f|
       f.html {}
       f.json { render json: @houses.to_json(include: :bookings)}
@@ -49,7 +58,7 @@ before_action :authorise, :only => [:edit, :show]
 
 private
   def house_params
-    params.require(:house).permit(:name, :address, :blurb, :about, :availability, :owner, :price, :amenities, :house_rules, :image1, :image2, :image3, :image4, :image5, :latitude, :longitude)
+    params.require(:house).permit(:name, :address, :blurb, :about, :availability, :city, :owner, :price, :amenities, :house_rules, :image1, :image2, :image3, :image4, :image5, :latitude, :longitude)
   end
 
   def authorise
